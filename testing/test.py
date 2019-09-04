@@ -5,20 +5,22 @@
 '''
 
 import numpy as np
-from util.util import readFile, vdecider
+from util.readFile import readFile
+from util.vdecider import vdecider
 from scipy.special import expit
 
 def test(fn, thetas):
 
-    fileName = f'datasets/test/{fn}-test.txt'
+    fileName = f'data/test/{fn}-test.txt'
     tests, n, _ = readFile(fileName, logistic=True)
 
-    features = tests[:, :-1]  # array of train examples
+    features = tests[:, :-1]  # array of training examples
     labels = tests[:, -1]  # array of corresponding labels
     values = np.unique(labels) # all possible values the labels have
 
-    p = expit(np.matmul(features, thetas.transpose()))
-    y_hats = vdecider(p)
+    thetas_h, thetas_y_hat = thetas
+    h = expit(np.matmul(features, thetas_h))
+    y_hats = vdecider(expit(np.matmul(h, thetas_y_hat)))
 
     guessed = np.zeros(len(values), dtype=int) #number of guesses for each value
     total = np.zeros(len(values), dtype=int)   #quantity of each value
@@ -40,5 +42,5 @@ def test(fn, thetas):
     report += f'Overall: tested {n}, correctly classified {guessed.sum()}\n'
     report += f'Accuracy: {float(guessed.sum()) / n}\n\n'
 
-    of = open('results/neural.txt', 'a+')
+    of = open('results/results.txt', 'a+')
     of.write(report)

@@ -1,6 +1,5 @@
 '''
     Implementation of a simple neural network with k hidden layers
-    for CS109 @ Stanford
     Ⓒ Artem Tkachuk
 '''
 
