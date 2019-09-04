@@ -30,3 +30,9 @@ Class 1.0: tested 235, correctly classified 0
 Overall: tested 500, correctly classified 265
 Accuracy: 0.53
 
+For "netflix" dataset:
+Class 0.0: tested 265, correctly classified 265
+Class 1.0: tested 235, correctly classified 0
+Overall: tested 500, correctly classified 265
+Accuracy: 0.53
+

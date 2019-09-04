@@ -16,7 +16,7 @@ def train(fn, nTimes, rate):
 
     fileName = f'data/train/{fn}-train.txt'
     data, n, mx = readFile(fileName)
-    mh = 12  # number of neurons in the hidden layer
+    mh = 2  # number of neurons in the hidden layer
 
 
     features = data[:, :-1]  # array of training examples
@@ -38,18 +38,18 @@ def train(fn, nTimes, rate):
         y_hats = y_hats.reshape(y_hats.shape[0], 1) #TODO remove
 
         # Backpropagation
-        gradient_y_hat = np.sum(((labels - y_hats) * h), axis=0)
+        delta = labels - y_hats
+        gradient_y_hat = np.sum(delta * h, axis=0)
 
-        deriv = (np.square(gradient_y_hat) * (np.sum((1 - h), axis=0))) #TODO remove
-        feat = np.sum(features, axis=0) #TODO remove
+        h * (1 - h) * thetas_y_hat.transpose()
+        features * delta
 
-        gradient_h = np.matmul(feat.reshape(feat.shape[0], 1), deriv.reshape(1, deriv.shape[0]))
+        gradient_h = np.sum()
 
         thetas_y_hat += rate * gradient_y_hat
         thetas_h += rate * gradient_h
 
         LL = logLikelihood(labels, y_hats)
-        print(LL)   #TODO remove
         replot(fig, ax, line, nTimes, xdata, ydata, k, LL)
 
     plt.savefig(f'graph/pics/{fn}.png')
