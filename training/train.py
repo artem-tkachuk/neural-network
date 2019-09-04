@@ -3,6 +3,12 @@
     Ⓒ Artem Tkachuk
 '''
 
+#left:
+# TODO: (mx x mh) or (mh x mx)
+# TODO: reshaping: read about (2,) and (2, 1)
+#  or how to convert from 1 dim to ndim
+#TODO: get 3dim array and sum by 3rd axis
+
 import numpy as np
 import matplotlib; matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt;  plt.ion()
