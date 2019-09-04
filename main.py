@@ -1,5 +1,5 @@
 '''
-    Implementation of a simple neural network with k hidden layers
+    Implementation of a simple neural network with 1 hidden layer
     Ⓒ Artem Tkachuk
 '''
 
