@@ -16,14 +16,16 @@ def train(fn, nTimes, rate):
 
     fileName = f'data/train/{fn}-train.txt'
     data, n, mx = readFile(fileName)
+    print(mx, n)
     mh = 12  # number of neurons in the hidden layer
 
 
     features = data[:, :-1]  # array of training examples
     labels = data[:, -1]  # array of corresponding labels
+    labels = labels.reshape(labels.shape[0], 1)
 
-    thetas_h = np.zeros((mx, mh))   #parameters for input layer
-    thetas_y_hat = np.zeros((mh,))  #parameters for hidden layer
+    thetas_h = np.ones((mx, mh))   #parameters for input layer
+    thetas_y_hat = np.ones((mh,))  #parameters for hidden layer
 
     gradient_h = np.zeros((mx, mh))
     gradient_y_hat = np.zeros((mh,))
@@ -33,22 +35,22 @@ def train(fn, nTimes, rate):
     for k in range(nTimes):
         #Forward Pass
         h = expit(np.matmul(features, thetas_h))
-        y_hats = expit(np.matmul(h, thetas_y_hat))
+        y_hats = expit(np.matmul(h, thetas_y_hat))  #TODO reshape
+        y_hats = y_hats.reshape(y_hats.shape[0], 1)
 
         # Backpropagation
-        gradient_y_hat = np.sum((labels - y_hats)[:, np.newaxis] * h, axis=0)
+        gradient_y_hat = np.sum(((labels - y_hats) * h), axis=0)
 
         deriv = (np.square(gradient_y_hat) * (np.sum((1 - h), axis=0)))
-        deriv = deriv.reshape(1, deriv.shape[0])
         feat = np.sum(features, axis=0)
-        feat = feat.reshape(feat.shape[0], 1)
 
-        gradient_h = np.matmul(feat, deriv)
+        gradient_h = np.matmul(feat.reshape(feat.shape[0], 1), deriv.reshape(1, deriv.shape[0]))
 
         thetas_y_hat += rate * gradient_y_hat
         thetas_h += rate * gradient_h
 
         LL = logLikelihood(labels, y_hats)
+        print(LL)
         replot(fig, ax, line, nTimes, xdata, ydata, k, LL)
 
     plt.savefig(f'graph/pics/{fn}.png')
