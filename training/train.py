@@ -3,12 +3,6 @@
     Ⓒ Artem Tkachuk
 '''
 
-#left:
-# TODO: (mx x mh) or (mh x mx)
-# TODO: reshaping: read about (2,) and (2, 1)
-#  or how to convert from 1 dim to ndim
-#TODO: get 3dim array and sum by 3rd axis
-
 import numpy as np
 import matplotlib; matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt;  plt.ion()
@@ -22,37 +16,35 @@ def train(fn, nTimes, rate):
 
     fileName = f'data/train/{fn}-train.txt'
     data, n, mx = readFile(fileName)
-    mh = 2  # number of neurons in the hidden layer
-
+    mh = 7  # number of neurons in the hidden layer
 
     features = data[:, :-1]  # array of training examples
-    labels = data[:, -1]  # array of corresponding labels
-    labels = labels.reshape(labels.shape[0], 1)     #TODO remove
+    labels = data[:, -1][:, np.newaxis]  # array of corresponding labels
 
-    thetas_h = np.ones((mx, mh))   #parameters for input layer
-    thetas_y_hat = np.ones((mh,))  #parameters for hidden layer
+    thetas_h = np.ones((mh, mx))   #parameters for input layer
+    thetas_y_hat = np.ones((mh,1))  #parameters for hidden layer
 
-    gradient_h = np.zeros((mx, mh))
-    gradient_y_hat = np.zeros((mh,))
+    gradient_h = np.zeros((mh, mx))
+    gradient_y_hat = np.zeros((mh,1))
 
     fig, ax, xdata, ydata, line = init(fn)     #plotting the log likelihood while training
 
     for k in range(nTimes):
         #Forward Pass
-        h = expit(np.matmul(features, thetas_h))
+        h = expit(np.matmul(features, thetas_h.transpose()))
         y_hats = expit(np.matmul(h, thetas_y_hat))  #TODO reshape
         y_hats = y_hats.reshape(y_hats.shape[0], 1) #TODO remove
 
         # Backpropagation
         delta = labels - y_hats
-        gradient_y_hat = np.sum(delta * h, axis=0)
+        gradient_y_hat = np.sum(delta * h, axis=0, keepdims=True)
 
-        h * (1 - h) * thetas_y_hat.transpose()
-        features * delta
+        t = h * (1 - h) * thetas_y_hat.transpose()
+        s = features * delta
+        for i in range(n):
+            gradient_h += np.matmul(t[i][np.newaxis, :].transpose(), s[i][np.newaxis, :])
 
-        gradient_h = np.sum()
-
-        thetas_y_hat += rate * gradient_y_hat
+        thetas_y_hat += rate * gradient_y_hat.transpose()
         thetas_h += rate * gradient_h
 
         LL = logLikelihood(labels, y_hats)

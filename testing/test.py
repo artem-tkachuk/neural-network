@@ -19,8 +19,9 @@ def test(fn, thetas):
     values = np.unique(labels) # all possible values the labels have
 
     thetas_h, thetas_y_hat = thetas
-    h = expit(np.matmul(features, thetas_h))
-    y_hats = vdecider(expit(np.matmul(h, thetas_y_hat)))
+    print(thetas_h, thetas_y_hat)
+    h = expit(np.matmul(features, thetas_h.transpose()))
+    y_hats = expit(np.matmul(h, thetas_y_hat))
 
     guessed = np.zeros(len(values), dtype=int) #number of guesses for each value
     total = np.zeros(len(values), dtype=int)   #quantity of each value
