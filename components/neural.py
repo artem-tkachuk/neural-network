@@ -14,14 +14,9 @@ def neural():
          #     'nTimes': 10000,
          #     'rate': 0.001
          # },
-        # {
-        #     'name': 'netflix',
-        #     'nTimes': 50,
-        #     'rate': 0.0001
-        # },
         {
-            'name': 'ancestry',
-            'nTimes': 100,
+            'name': 'netflix',
+            'nTimes': 20,
             'rate': 0.0001
         },
     ]
