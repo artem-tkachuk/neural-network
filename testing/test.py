@@ -5,6 +5,7 @@
 '''
 
 import numpy as np
+from util.sigmoid import sigmoid
 from util.readFile import readFile
 from util.vdecider import vdecider
 from scipy.special import expit
@@ -12,17 +13,33 @@ from scipy.special import expit
 def test(fn, thetas):
 
     fileName = f'data/test/{fn}-test.txt'
-    tests, n, _ = readFile(fileName, logistic=True)
+    tests, n, mx = readFile(fileName, logistic=True)
 
     features = tests[:, :-1]  # array of training examples
     labels = tests[:, -1]  # array of corresponding labels
     values = np.unique(labels) # all possible values the labels have
+    y_hats = np.empty(labels.shape)
 
-    thetas_h, thetas_y_hat = thetas
-    print(thetas_h, thetas_y_hat)
-    h = expit(np.matmul(features, thetas_h.transpose()))
-    y_hats = expit(np.matmul(h, thetas_y_hat))
+    thetas_h, thetas_y_hat, mh = thetas
 
+    for example in range(n):
+
+        x, y, h = features[example], labels[example], np.zeros((mh))
+        #computing h
+        for j in range(mh):
+            sum = 0.0
+            for i in range(mx):
+                sum += x[i] * thetas_h[i][j]
+            h[j] = sigmoid(sum)
+
+        # computing prediction
+        sum = 0
+        for j in range(mh):
+            sum += thetas_y_hat[j] * h[j]
+        y_hat = sigmoid(sum)
+        y_hats[example] = y_hat
+
+    y_hats = vdecider(y_hats)
     guessed = np.zeros(len(values), dtype=int) #number of guesses for each value
     total = np.zeros(len(values), dtype=int)   #quantity of each value
 
