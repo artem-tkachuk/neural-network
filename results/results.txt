@@ -40,3 +40,21 @@ Class 1.0: tested 235, correctly classified 0
 Overall: tested 500, correctly classified 265
 Accuracy: 0.53
 
+For "ancestry" dataset:
+Class 0.0: tested 109, correctly classified 0
+Class 1.0: tested 75, correctly classified 75
+Overall: tested 184, correctly classified 75
+Accuracy: 0.4076086956521739
+
+For "ancestry" dataset:
+Class 0.0: tested 109, correctly classified 0
+Class 1.0: tested 75, correctly classified 75
+Overall: tested 184, correctly classified 75
+Accuracy: 0.4076086956521739
+
+For "ancestry" dataset:
+Class 0.0: tested 109, correctly classified 109
+Class 1.0: tested 75, correctly classified 0
+Overall: tested 184, correctly classified 109
+Accuracy: 0.592391304347826
+
