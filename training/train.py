@@ -29,12 +29,11 @@ def train(fn, nTimes, rate, mh):
     fig, ax, xdata, ydata, line = init(fn)     #plotting the log likelihood while training
 
     for k in range(nTimes):
-        gradient_h = np.zeros((mx, mh))
-        gradient_y_hat = np.zeros((mh))
+        gradient_h, gradient_y_hat, h = np.zeros((mx, mh)), np.zeros((mh)), np.zeros((mh))
 
         for example in range(n):
             # Forward Pass, computing hidden layer
-            x, y, h = features[example], labels[example], np.zeros((mh))
+            x, y,  = features[example], labels[example]
             for j in range(mh):
                 sum = 0.0
                 for i in range(mx):
