@@ -13,7 +13,6 @@ from util.logLikelihood import logLikelihood
 from util.sigmoid import sigmoid
 from graph.graph import init, replot
 
-
 def train(fn, nTimes, rate, mh):
 
     fileName = f'data/train/{fn}-train.txt'

@@ -39,6 +39,7 @@ def test(fn, thetas):
         y_hat = sigmoid(sum)
         y_hats[example] = y_hat
 
+    print(y_hats)
     y_hats = vdecider(y_hats)
     guessed = np.zeros(len(values), dtype=int) #number of guesses for each value
     total = np.zeros(len(values), dtype=int)   #quantity of each value
