@@ -16,14 +16,15 @@ from graph.graph import init, replot
 def train(fn, nTimes, rate, mh):
 
     fileName = f'data/train/{fn}-train.txt'
-    data, n, mx = readFile(fileName)
+    data, n, mx = readFile(fileName)     # of training examples and neurons in the hidden layer
 
     features = data[:, :-1]              # matrix of training examples
-    labels = data[:, -1]  # vector of corresponding labels
-    y_hats = np.empty(labels.shape)
+    labels = data[:, -1]                 #vector of corresponding labels
+    y_hats = np.empty(labels.shape)      #vector of predictions
 
-    thetas_h = np.zeros((mx, mh))         #parameters for input layer
-    thetas_y_hat = np.zeros(mh)      #parameters for hidden layer
+    thetas_h = np.zeros((mx, mh))         #parameters for hidden layer
+    thetas_y_hat = np.zeros((mh))         #parameters for hidden layer
+
 
     fig, ax, xdata, ydata, line = init(fn)     #plotting the log likelihood while training
 
@@ -33,7 +34,8 @@ def train(fn, nTimes, rate, mh):
 
         for example in range(n):
             # Forward Pass, computing hidden layer
-            x, y, h = features[example], labels[example], np.zeros((mh))
+            x, y, h = features[example], labels[example], np.empty((mh))
+
             for j in range(mh):
                 sum = 0.0
                 for i in range(mx):
@@ -54,7 +56,7 @@ def train(fn, nTimes, rate, mh):
 
             for i in range(mx):
                 for j in range(mh):
-                    gradient_h[i][j] += delta * h[j] * thetas_y_hat[j] * (1 - h[j]) * x[i]    #error here
+                    gradient_h[i][j] += delta * h[j] * (1 - h[j]) * thetas_y_hat[j] * x[i]
 
         # updating parameters
         for j in range(mh):
@@ -63,6 +65,7 @@ def train(fn, nTimes, rate, mh):
         for i in range(mx):
             for j in range(mh):
                 thetas_h[i][j] += rate * gradient_h[i][j]
+
 
         LL = logLikelihood(labels, y_hats)
         print(LL)
