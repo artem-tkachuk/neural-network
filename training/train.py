@@ -16,7 +16,7 @@ from graph.graph import init, replot
 def train(fn, nTimes, rate, mh):
 
     fileName = f'data/train/{fn}-train.txt'
-    data, n, mx = readFile(fileName)
+    data, n, mh = readFile(fileName)
 
     features = data[:, :-1]              # matrix of training examples
     labels = data[:, -1]  # vector of corresponding labels
@@ -27,27 +27,27 @@ def train(fn, nTimes, rate, mh):
     fig, ax, xdata, ydata, line = init(fn)     #plotting the log likelihood while training
 
     for k in range(nTimes):
-        gradient_y_hat = np.zeros((mx))
+        gradient_y_hat = np.zeros((mh))
 
         for example in range(n):
             # Forward Pass, computing hidden layer
-            x, y = features[example], labels[example]
+            h, y = features[example], labels[example]
 
             #computing prediction
             sum = 0
-            for i in range(mx):
-                sum += thetas_y_hat[i] * x[i]
+            for j in range(mh):
+                sum += thetas_y_hat[j] * h[j]
             y_hat = sigmoid(sum)
             y_hats[example] = y_hat
             delta = y - y_hat
 
             # computing gradients
-            for i in range(mx):
-                gradient_y_hat[i] += delta * x[i]
+            for j in range(mh):
+                gradient_y_hat[j] += delta * h[j]
 
         # updating parameters
-        for i in range(mx):
-            thetas_y_hat[i] += rate * gradient_y_hat[i]
+        for j in range(mh):
+            thetas_y_hat[j] += rate * gradient_y_hat[j]
 
 
         LL = logLikelihood(labels, y_hats)
