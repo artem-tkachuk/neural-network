@@ -22,47 +22,33 @@ def train(fn, nTimes, rate, mh):
     labels = data[:, -1]  # vector of corresponding labels
     y_hats = np.empty(labels.shape)
 
-    thetas_h = np.zeros((mx, mh))         #parameters for input layer
-    thetas_y_hat = np.zeros(mh)      #parameters for hidden layer
+    thetas_y_hat = np.zeros((mh))         #parameters for input layer
 
     fig, ax, xdata, ydata, line = init(fn)     #plotting the log likelihood while training
 
     for k in range(nTimes):
-        gradient_h = np.zeros((mx, mh))
-        gradient_y_hat = np.zeros((mh))
+        gradient_y_hat = np.zeros((mx))
 
         for example in range(n):
             # Forward Pass, computing hidden layer
-            x, y, h = features[example], labels[example], np.zeros((mh))
-            for j in range(mh):
-                sum = 0.0
-                for i in range(mx):
-                    sum += x[i] * thetas_h[i][j]
-                h[j] = sigmoid(sum)
+            x, y = features[example], labels[example]
 
             #computing prediction
             sum = 0
-            for j in range(mh):
-                sum += thetas_y_hat[j] * h[j]
+            for i in range(mx):
+                sum += thetas_y_hat[i] * x[i]
             y_hat = sigmoid(sum)
             y_hats[example] = y_hat
             delta = y - y_hat
 
             # computing gradients
-            for j in range(mh):
-                gradient_y_hat[j] += delta * h[j]
-
             for i in range(mx):
-                for j in range(mh):
-                    gradient_h[i][j] += delta * h[j] * thetas_y_hat[j] * (1 - h[j]) * x[i]    #error here
+                gradient_y_hat[i] += delta * x[i]
 
         # updating parameters
-        for j in range(mh):
-            thetas_y_hat[j] += rate * gradient_y_hat[j]
-
         for i in range(mx):
-            for j in range(mh):
-                thetas_h[i][j] += rate * gradient_h[i][j]
+            thetas_y_hat[i] += rate * gradient_y_hat[i]
+
 
         LL = logLikelihood(labels, y_hats)
         print(LL)
@@ -71,7 +57,7 @@ def train(fn, nTimes, rate, mh):
 
     plt.savefig(f'graph/pics/{fn}.png')
 
-    return (thetas_h, thetas_y_hat, mh)
+    return thetas_y_hat
 
 # TODO loop for many h layers here? Or a matrix thing is possible with multiple layers too? Yes! 3d theta where i-th grid is current h
 # TODO make it a vector of size n, if there are n hidden layers in the network

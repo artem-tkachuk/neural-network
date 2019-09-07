@@ -19,27 +19,19 @@ def test(fn, thetas):
     values = np.unique(labels) # all possible values the labels have
     y_hats = np.empty(labels.shape)
 
-    thetas_h, thetas_y_hat, mh = thetas
-    print(thetas_h, thetas_y_hat)
+    thetas_y_hat = thetas
 
     for example in range(n):
 
-        x, y, h = features[example], labels[example], np.zeros((mh))
-        #computing h
-        for j in range(mh):
-            sum = 0.0
-            for i in range(mx):
-                sum += x[i] * thetas_h[i][j]
-            h[j] = sigmoid(sum)
+        x, y = features[example], labels[example]
 
         # computing prediction
         sum = 0
-        for j in range(mh):
-            sum += thetas_y_hat[j] * h[j]
+        for i in range(mx):
+            sum += thetas_y_hat[i] * x[i]
         y_hat = sigmoid(sum)
         y_hats[example] = y_hat
 
-    print(y_hats)
     y_hats = vdecider(y_hats)
     guessed = np.zeros(len(values), dtype=int) #number of guesses for each value
     total = np.zeros(len(values), dtype=int)   #quantity of each value

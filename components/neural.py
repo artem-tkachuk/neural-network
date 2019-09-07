@@ -16,7 +16,7 @@ def neural():
          # },
         {
             'name': 'netflix',
-            'nTimes': 5,
+            'nTimes': 300,
             'rate': 0.0001
         },
         # {
