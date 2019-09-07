@@ -22,8 +22,8 @@ def train(fn, nTimes, rate, mh):
     labels = data[:, -1]  # vector of corresponding labels
     y_hats = np.empty(labels.shape)
 
-    thetas_h = np.ones((mx, mh))         #parameters for input layer
-    thetas_y_hat = np.ones(mh)      #parameters for hidden layer
+    thetas_h = np.zeros((mx, mh))         #parameters for input layer
+    thetas_y_hat = np.zeros(mh)      #parameters for hidden layer
 
     fig, ax, xdata, ydata, line = init(fn)     #plotting the log likelihood while training
 
@@ -46,20 +46,26 @@ def train(fn, nTimes, rate, mh):
                 sum += thetas_y_hat[j] * h[j]
             y_hat = sigmoid(sum)
             y_hats[example] = y_hat
+            delta = y - y_hat
 
             # computing gradients
             for j in range(mh):
-                gradient_y_hat[j] += (y - y_hat) * h[j]
+                gradient_y_hat[j] += delta * h[j]
 
             for i in range(mx):
                 for j in range(mh):
-                    gradient_h[i][j] += math.pow(thetas_y_hat[j], 2) * (1 - h[j]) * x[i]
+                    gradient_h[i][j] += delta * h[j] * thetas_y_hat[j] * (1 - h[j]) * x[i]    #error here
 
         # updating parameters
-        thetas_y_hat += rate * gradient_y_hat
-        thetas_h += rate * gradient_h
+        for j in range(mh):
+            thetas_y_hat[j] += rate * gradient_y_hat[j]
+
+        for i in range(mx):
+            for j in range(mh):
+                thetas_h[i][j] += rate * gradient_h[i][j]
 
         LL = logLikelihood(labels, y_hats)
+        print(LL)
         replot(fig, ax, line, nTimes, xdata, ydata, k, LL)
 
 

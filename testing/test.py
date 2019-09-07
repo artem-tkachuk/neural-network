@@ -1,6 +1,5 @@
 '''
     Implementation of a simple neural network with 1 hidden layer
-    for CS109 @ Stanford
     Ⓒ Artem Tkachuk
 '''
 
@@ -21,6 +20,7 @@ def test(fn, thetas):
     y_hats = np.empty(labels.shape)
 
     thetas_h, thetas_y_hat, mh = thetas
+    print(thetas_h, thetas_y_hat)
 
     for example in range(n):
 

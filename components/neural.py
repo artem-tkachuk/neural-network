@@ -14,19 +14,19 @@ def neural():
          #     'nTimes': 10000,
          #     'rate': 0.001
          # },
-        # {
-        #     'name': 'netflix',
-        #     'nTimes': 20,
-        #     'rate': 0.0001
-        # },
         {
-            'name': 'ancestry',
-            'nTimes': 100,
+            'name': 'netflix',
+            'nTimes': 5,
             'rate': 0.0001
         },
+        # {
+        #     'name': 'ancestry',
+        #     'nTimes': 100,
+        #     'rate': 0.0001
+        # },
     ]
 
-    mh = 12  # number of neurons in the hidden layer
+    mh = 0  # number of neurons in the hidden layer
 
     for ds in datasets:
         thetas = train(ds['name'], ds['nTimes'], ds['rate'], mh)
