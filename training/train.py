@@ -15,22 +15,22 @@ from graph.graph import init, replot
 
 def train(fn, nTimes, rate, mh):
 
-    fileName = f'data/train/{fn}-train.txt'
+    fileName = f'data/train/{fn}.train'
     data, n, mx = readFile(fileName)     # of training examples and neurons in the hidden layer
 
     features = data[:, :-1]              # matrix of training examples
     labels = data[:, -1]                 #vector of corresponding labels
     y_hats = np.empty(labels.shape)      #vector of predictions
 
-    thetas_h = np.zeros((mx, mh))         #parameters for hidden layer
-    thetas_y_hat = np.zeros((mh))         #parameters for hidden layer
+    thetas_h = np.random.normal(0, math.sqrt(1 / mx), ((mx, mh)))       #parameters for hidden layer
+    thetas_y_hat = np.random.normal(0, math.sqrt(1 / mh), (mh))         #parameters for hidden layer
 
 
     fig, ax, xdata, ydata, line = init(fn)     #plotting the log likelihood while training
 
     for k in range(nTimes):
-        gradient_h = np.zeros((mx, mh))
-        gradient_y_hat = np.zeros((mh))
+        gradient_h = np.full((mx, mh), 1 / mx)
+        gradient_y_hat = np.full((mh), 1 / mh)
 
         for example in range(n):
             # Forward Pass, computing hidden layer
@@ -65,7 +65,6 @@ def train(fn, nTimes, rate, mh):
         for i in range(mx):
             for j in range(mh):
                 thetas_h[i][j] += rate * gradient_h[i][j]
-
 
         LL = logLikelihood(labels, y_hats)
         print(LL)

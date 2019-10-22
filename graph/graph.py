@@ -16,7 +16,7 @@ def init(fn):
 
     plt.xlabel('n Times')
     plt.ylabel('LL(Θ)')
-    plt.title(f'"{fn}"dataset')
+    plt.title(f'"{fn}" dataset')
 
     xdata, ydata = [], []
     line, = ax.plot(xdata, ydata, 'r-')
@@ -44,7 +44,6 @@ def replot(fig, ax, line, nTimes, xdata, ydata, k, LL):
     xdata.append(k + 1)
     ydata.append(LL)
     line.set_data(xdata, ydata)
-
 
     if k % (nTimes / frequency) == 0:
         fig.canvas.draw()

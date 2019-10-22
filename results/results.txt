@@ -1,6 +1,8 @@
-For "netflix" dataset:
-Class 0.0: tested 265, correctly classified 180
-Class 1.0: tested 235, correctly classified 191
-Overall: tested 500, correctly classified 371
-Accuracy: 0.742
+
+
+For "SPECT" dataset:
+Class 0.0: tested 103, correctly classified 81
+Class 1.0: tested 84, correctly classified 46
+Overall: tested 187, correctly classified 127
+ Accuracy: 0.679144385026738
 

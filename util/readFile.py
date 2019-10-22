@@ -1,7 +1,6 @@
 import numpy as np
 import io
 
-
 def readFile(fileName, mode='r', logistic = False):
     fileData = open(fileName, mode)
     m = int(fileData.readline()) + 1  # number of features + theta0

@@ -11,7 +11,7 @@ from scipy.special import expit
 
 def test(fn, thetas):
 
-    fileName = f'data/test/{fn}-test.txt'
+    fileName = f'data/test/{fn}.test'
     tests, n, mx = readFile(fileName, logistic=True)
 
     features = tests[:, :-1]  # array of training examples
@@ -19,19 +19,27 @@ def test(fn, thetas):
     values = np.unique(labels) # all possible values the labels have
     y_hats = np.empty(labels.shape)
 
-    thetas_y_hat = thetas
+    thetas_h, thetas_y_hat, mh = thetas
+    print(thetas_h, thetas_y_hat)
 
     for example in range(n):
 
-        x, y = features[example], labels[example]
+        x, y, h = features[example], labels[example], np.zeros((mh))
+        #computing h
+        for j in range(mh):
+            sum = 0.0
+            for i in range(mx):
+                sum += x[i] * thetas_h[i][j]
+            h[j] = sigmoid(sum)
 
         # computing prediction
         sum = 0
-        for i in range(mx):
-            sum += thetas_y_hat[i] * x[i]
+        for j in range(mh):
+            sum += thetas_y_hat[j] * h[j]
         y_hat = sigmoid(sum)
         y_hats[example] = y_hat
 
+    print(y_hats)
     y_hats = vdecider(y_hats)
     guessed = np.zeros(len(values), dtype=int) #number of guesses for each value
     total = np.zeros(len(values), dtype=int)   #quantity of each value
@@ -50,8 +58,8 @@ def test(fn, thetas):
     for i in range(len(values)):
         report += f'Class {values[i]}: tested {total[i]}, ' \
                f'correctly classified {guessed[i]}\n'
-    report += f'Overall: tested {n}, correctly classified {guessed.sum()}\n'
-    report += f'Accuracy: {float(guessed.sum()) / n}\n\n'
+    report += f'Overall: tested {n}, correctly classified {guessed.sum()}\n ' \
+              f'Accuracy: {float(guessed.sum()) / n}\n\n'
 
     of = open('results/results.txt', 'a+')
     of.write(report)

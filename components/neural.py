@@ -9,24 +9,19 @@ from testing.test import test
 def neural():
 
     datasets = [
-         # {
-         #     'name': 'simple',
-         #     'nTimes': 10000,
-         #     'rate': 0.001
-         # },
-        {
-            'name': 'netflix',
-            'nTimes': 7,
-            'rate': 0.0001
-        },
         # {
-        #     'name': 'ancestry',
-        #     'nTimes': 100,
+        #     'name': 'netflix',
+        #     'nTimes': 10,
         #     'rate': 0.0001
         # },
+        {
+            'name': 'SPECT',
+            'nTimes': 1000,
+            'rate': 0.001
+        }
     ]
 
-    mh = 19  # number of neurons in the hidden layer
+    mh = 13  # number of neurons in the hidden layer
 
     for ds in datasets:
         thetas = train(ds['name'], ds['nTimes'], ds['rate'], mh)

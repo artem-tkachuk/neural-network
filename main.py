@@ -3,10 +3,10 @@
     Ⓒ Artem Tkachuk
 '''
 
-from components import neural
+from components.neural import neural
 
 def main():
-    neural.neural()
+    neural()
 
 if __name__ == '__main__':
     main()
