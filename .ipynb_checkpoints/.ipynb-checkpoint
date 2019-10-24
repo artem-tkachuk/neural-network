@@ -1,0 +1,78 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "pycharm": {
+     "name": "#%% md\n"
+    }
+   },
+   "source": [
+    "<font size=\"6\">Hi! Welcome to the guide for this workshop. <br><br></font>\n",
+    "<font size=\"4\">Let's start with the things we will need to successfully complete it:<br>\n",
+    "\n",
+    "Step zero: (yes, zero, because we are Computer Scientists!): [Download Python](https://www.python.org/downloads/)\n",
+    "\n",
+    "After this, first, create a separate folder for this workshop and inside add a <i>\"data\"</i> folder with <i>\"training\"</i> and <i>\"testing\"</i> subfolders in it. Naming is up to you of course, but this way it is clear. \n",
+    "\n",
+    "Machine Learning needs a lot of data, right? Right! Get the <b>dataset</b>  that we will be using: <br> [training file](https://drive.google.com/open?id=1y4NyLnO6m3x_x7zfzvjBVc6ibSscmfqC) <br> [testing file](https://drive.google.com/open?id=1BoNFjr4Lc0EnMR1O7s2DocMEHo3N1YUy)<br><br>\n",
+    "Just click \"download\" when the window saying \"No preview available\" show up. Put the files into appropriate folders you have just created. Actually, I prepared these two files a little bit by adding the number of features and the number of training examples as the first two lines at the top of each file :) We will talk about what these numbers mean later!<br><br>\n",
+    "Also, if you would like to discover what this dataset represents and what it is about, here is the page:\n",
+    "[info about the dataset](https://archive.ics.uci.edu/ml/datasets/spect+heart)<br>\n",
+    "\n",
+    "In general, [UCI Machine Learning](archive.ics.uci.edu/ml/index.php) repository is a great place to discover various datasets and find challenging problems for all levels of experience.\n",
+    "\n",
+    "<b>IDE:</b> [PyCharm](https://www.jetbrains.com/pycharm/download/) (<b>Highly</b> Recommended). You can get the community edition for free or even get a PRO version if you sign up for [GitHub Student Developer Pack](https://education.github.com/pack), which is also recommended since this bundle provides a huge number of amazing things like free cloud credit and access to many paid platforms. \n",
+    "<br>\n",
+    "\n",
+    "You <i>can</i> install [Jupyter Notebook](https://jupyter.org/install), but it is not required becuase you can view this notebook right in the browser which you are currently doing.<br>\n",
+    "\n",
+    "Other components, libraries and products we will be using. Please install them beforehand and let me know if something does not work!\n",
+    "<ul>\n",
+    "    <li><a href=\"https://matplotlib.org/users/installing.html\">Matplotlib</a> (a great Python library for graphing)</li>\n",
+    "    <li><a href=\"https://scipy.org/install.html\">SciPy</a> (an amazing pack of libraries for scientific purposes)</li>\n",
+    "    <li>NumPy (already a part of SciPy, so do not worry about it)</li>\n",
+    "    <li>Math, io (Already shipped with Python, so do not worry about installing these two as well)</li></ul>\n",
+    "\n",
+    "And now we are all set! Contact me if you have any problems with installing anything: Discord | [Telegram](https://t.me/artemtkachuk) | [Facebook](https://www.facebook.com/artemtkachuk27)</font>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.7.3"
+  },
+  "pycharm": {
+   "stem_cell": {
+    "cell_type": "raw",
+    "metadata": {
+     "collapsed": false
+    },
+    "source": []
+   }
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 1
+}
